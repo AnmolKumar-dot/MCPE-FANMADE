@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scene tscn_format="4.7">
+[node name="Main" type="Node3D"]
+script = ExtResource("res://scripts/core/Main.gd")
+
+[node name="GameManager" parent="." type="Node"]
+script = ExtResource("res://scripts/core/GameManager.gd")
+
+[node name="WorldManager" parent="." type="Node"]
+script = ExtResource("res://scripts/world/WorldManager.gd")
+
+[node name="Player" parent="." type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+script = ExtResource("res://scripts/player/PlayerController.gd")
+
+[node name="Camera3D" parent="Player" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="GroundRay" parent="Player" type="RayCast3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+target_position = Vector3(0, -1.1, 0)
+collision_mask = 1
+
+[node name="BlockInteraction" parent="Player" type="Node"]
+script = ExtResource("res://scripts/player/BlockInteraction.gd")
+
+[node name="SurvivalSystem" parent="Player" type="Node"]
+script = ExtResource("res://scripts/player/SurvivalSystem.gd")
+
+[node name="WorldEnvironment" parent="." type="WorldEnvironment"]
+
+[node name="DirectionalLight3D" parent="." type="DirectionalLight3D"]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 50, 0)
+shadow_enabled = true
+
+[node name="DayNightCycle" parent="." type="Node"]
+script = ExtResource("res://scripts/world/DayNightCycle.gd")
+
+[node name="UI" parent="." type="CanvasLayer"]
+layer = 10
+
+[node name="Hotbar" parent="UI" type="Control"]
+layout_mode = 0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("res://scripts/ui/HotbarUI.gd")
+
+[node name="MobileControls" parent="UI" type="CanvasLayer"]
+layer = 20
+script = ExtResource("res://scripts/ui/MobileControls.gd")
+
+[node name="PauseMenu" parent="UI" type="Control"]
+visible = false
+layout_mode = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("res://scripts/ui/PauseMenu.gd")
+
+[node name="DebugOverlay" parent="UI" type="Control"]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("res://scripts/ui/DebugOverlay.gd")
